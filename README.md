@@ -6,6 +6,9 @@ A passive security scanner built with the MERN stack. Submit any URL and get a f
 
 ---
 
+## 🌐 Live Demo
+**https://secure-lens-six.vercel.app**
+
 ## Quick Start
 
 ### Prerequisites
