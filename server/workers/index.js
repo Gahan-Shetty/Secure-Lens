@@ -25,14 +25,21 @@ scanQueue.process(async (job) => {
     emit('scan:log', { message: '[ RECON] Running DNS & WHOIS lookup...' });
     emit('scan:log', { message: '[ BREACH] Checking breach exposure...' });
     emit('scan:log', { message: '─────────────────────────────────' });
+const scanPromise = Promise.all([
+  sslWorker(scanId, url, emit),
+  headersWorker(scanId, url, emit),
+  reconWorker(scanId, url, emit),
+  breachWorker(scanId, url, emit),
+]);
 
-    const [sslResults, headerResults, reconResults, breachResults] = await Promise.all([
-      sslWorker(scanId, url, emit),
-      headersWorker(scanId, url, emit),
-      reconWorker(scanId, url, emit),
-      breachWorker(scanId, url, emit),
-    ]);
+const timeoutPromise = new Promise((_, reject) =>
+  setTimeout(() => reject(new Error('Scan timed out after 25 seconds')), 25000)
+);
 
+const [sslResults, headerResults, reconResults, breachResults] = await Promise.race([
+  scanPromise,
+  timeoutPromise,
+]);
     const allResults = [...sslResults, ...headerResults, ...reconResults, ...breachResults];
     const score = scoreEngine(allResults);
 
