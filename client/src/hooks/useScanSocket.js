@@ -10,7 +10,9 @@ export function useScanSocket(scanId) {
   useEffect(() => {
     if (!scanId) return
 
-    const socket = io('http://localhost:5000', { transports: ['websocket'] })
+    const socket = io('https://secure-lens-production.up.railway.app', {
+      transports: ['websocket']
+    })
 
     socket.on('connect', () => {
       setConnected(true)
