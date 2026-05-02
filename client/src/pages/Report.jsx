@@ -23,6 +23,31 @@ export default function Report() {
   const [activeTab, setActiveTab] = useState('all')
   const [fetching, setFetching] = useState(false)
 
+  useEffect(() => {
+  // Fetch scan status first on page load
+  const fetchScanAndResults = async () => {
+    try {
+      const scanRes = await api.get(`/scans/${scanId}`)
+      const scanData = scanRes.data
+
+      // If already done, fetch results immediately
+      if (scanData.status === 'done' || scanData.status === 'failed') {
+        setFetching(true)
+        const res = await api.get(`/results/${scanId}`)
+        setResults(res.data.results)
+        setGrouped(res.data.grouped)
+        setScan(res.data.scan)
+        setFetching(false)
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  fetchScanAndResults()
+}, [scanId])
+
+
   // Fetch results when scan completes
   useEffect(() => {
     if (status === 'done' && !results) {
