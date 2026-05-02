@@ -2,6 +2,7 @@
   "name": "securelens",
   "version": "1.0.0",
   "scripts": {
+    "start": "cd server && node index.js",
     "client": "cd client && npm run dev",
     "server": "cd server && node index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
