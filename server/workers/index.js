@@ -18,6 +18,7 @@ scanQueue.process(async (job) => {
   try {
     await Scan.findByIdAndUpdate(scanId, { status: 'running' });
     emit('scan:status', { status: 'running' });
+    await new Promise(r => setTimeout(r, 2000));
     emit('scan:log', { message: `Target locked: ${url}` });
     emit('scan:log', { message: '─────────────────────────────────' });
     emit('scan:log', { message: '[ SSL  ] Checking SSL/TLS certificate...' });

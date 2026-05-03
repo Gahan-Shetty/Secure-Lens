@@ -15,11 +15,13 @@ export default function Home() {
   const [error, setError]     = useState('')
   const navigate = useNavigate()
 
-  const handleScan = async (url) => {
+const handleScan = async (url) => {
     setLoading(true)
     setError('')
     try {
       const res = await api.post('/scans', { url })
+      // Navigate immediately — socket will connect on report page
+      // while scan is still queued/starting
       navigate(`/report/${res.data.scanId}`)
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to start scan. Please try again.')

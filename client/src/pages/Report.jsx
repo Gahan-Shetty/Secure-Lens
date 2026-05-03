@@ -92,7 +92,7 @@ export default function Report() {
       )}
 
       {/* Live terminal — show while running */}
-      {(status === 'running' || status === 'queued' || logs.length > 0) && (
+      {(status === 'running' || status === 'queued' || status === 'done' || logs.length > 0) && (
         <div className="mb-8">
           <p className="section-label mb-3">Live output</p>
           <LiveTerminal logs={logs} status={status} />
