@@ -11,15 +11,15 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="border-b border-gray-800 bg-gray-950/80 backdrop-blur sticky top-0 z-50">
+    <nav style={{ backgroundColor: '#0f0a1e', borderBottom: '1px solid #2d1b69' }} className="backdrop-blur sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
 
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-teal-400 font-mono font-bold text-lg tracking-tight">
-            🔍 SecureLens
-          </span>
-        </Link>
+      {/* Logo */}
+      <Link to="/" className="flex items-center gap-2">
+        <span className="glitch-logo" data-text="🔍 SecureLens">
+          🔍 SecureLens
+        </span>
+      </Link>
 
         {/* Nav links */}
         {user && (

@@ -8,8 +8,8 @@ export default {
       },
       colors: {
         teal: {
-          400: '#2dd4bf',
-          500: '#14b8a6',
+        400: '#2dd4bf',
+        500: '#14b8a6',
         },
       },
       animation: {
