@@ -21,12 +21,11 @@ function getRedisConfig(url) {
 
 const scanQueue = new Bull('scan-queue', {
   redis: getRedisConfig(redisUrl),
-  defaultJobOptions: {
-    attempts: 3,
-    backoff: { type: 'exponential', delay: 2000 },
-    removeOnComplete: 100,
-    removeOnFail: 50,
-  },
+defaultJobOptions: {
+  attempts: 1,
+  removeOnComplete: 5,
+  removeOnFail: 5,
+},
 });
 
 async function addScanJob(data) {
