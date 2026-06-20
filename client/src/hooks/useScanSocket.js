@@ -11,7 +11,7 @@ useEffect(() => {
     if (!scanId) return
 
     // Connect immediately and aggressively
-    const socket = io('https://secure-lens-production.up.railway.app', {
+    const socket = io('https://secure-lens.onrender.com', {
       transports: ['websocket'],
       reconnection: true,
       reconnectionAttempts: 5,
